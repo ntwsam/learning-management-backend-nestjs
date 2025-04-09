@@ -2,7 +2,7 @@ import { Controller, Post, Body, HttpStatus, HttpCode, Res, Req, UnauthorizedExc
 import { RegisterDto } from './dto/register_user.dto';
 import { AdminRegisterDto } from './dto/register_admin.dto'
 import { AuthService } from './auth.service';
-import { Role, Users } from '@prisma/client';
+import { Role } from '@prisma/client';
 import { Public } from './public.decorator';
 import { LoginDto } from './dto/login.dot';
 import { Request, Response } from 'express';
