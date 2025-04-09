@@ -11,7 +11,6 @@ import { plainToInstance } from 'class-transformer';
 export class CoursesController {
     constructor(private readonly coursesService:CoursesService){}
 
-    @Roles(Role.admin)
     @Get()
     async findAll(){
         return this.coursesService.findAll()
@@ -39,7 +38,6 @@ export class CoursesController {
         return this.coursesService.findCourseByAdvisor(+id)
     }
 
-    @Roles(Role.admin)
     @Get(':id')
     async findById(@Param('id') id:number){
         return this.coursesService.findCourse(+id)
