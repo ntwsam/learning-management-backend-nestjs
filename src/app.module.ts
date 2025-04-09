@@ -8,10 +8,9 @@ import { AuthGuard } from './auth/auth.guard';
 import { RolesGuard } from './role/roles.guard';
 import { RedisModule } from './redis/redis.module';
 import { UsersModule } from './users/users.module';
-import { CoursesModule } from './courses/courses.module';
 
 @Module({
-  imports: [AuthModule, PrismaModule, RedisModule, UsersModule, CoursesModule],
+  imports: [AuthModule, PrismaModule, RedisModule, UsersModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_GUARD,
