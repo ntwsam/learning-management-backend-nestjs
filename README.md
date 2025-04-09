@@ -1,98 +1,87 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Learning Management System Backend (NestJS)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Backend system for a Learning Management System ( LMS ) built with **NestJS**, supporting **RESTful API**, **user authentication**, and **Docker Compose** for container orchestration.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 💡 About the project
 
-## Description
+This project aims to provide a scalable API for LMS. Key features include:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- User management (CRUD)
+- Course management
+- Enrollment handling
+- Authentication and role-based access control
 
-## Project setup
+## 📦 Technologies Used
+- Nestjs ( Backend Framework )
+- TypeScript
+- PostgreSQL ( Relational Database: created by Docker )
+- Redis ( In-memory Data: created by Docker )
+- Prisma ( ORM )
 
-```bash
-$ npm install
-```
+## ✅ Requirement
+- Docker
+- Node.js ( version 18 up )
 
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## How to install
+1. Clone repository
+   ```bash
+   git clone https://github.com/ntwsam/learning-management-backend-nestjs.git
+   cd learning-management-backend-nestjs
+   ```
+2. setting environment
+   - create `.env` file 
+      example:
+     
+       ```bash
+       - DATABASE_URL="postgresql://ntwsam:root@postgres:5432/lms_nestjs?schema=public"
+       - REDIS_HOST=redis
+       - REDIS_PORT=6379
+       - ADMIN_SECRET=admin_secret
+       - JWT_SECRET=jwt_secret
+       - JWT_REFRESH_SECRET=jwt_refresh_secret
+       ```
+3. run docker
+   - `PostgreSQL` and `Redis` will running in Container
+     
+     ```
+     docker compose up -d --build
+     ```
+5. run prisma
+   
+   ```
+   npx prisma migrate dev
+   npx prisma generate
+   ```
+6. API Endpoints
+   - auth
+     - `POST /auth/signup` : register new user
+     - `POST /auth/admin/signup` : register new admin
+     - `POST /auth/login` : logged in
+     - `POST /auth/logout` : logged out
+     - `POST /auth/refresh` : generate new accessToken and new refreshToken(rotation)
+   - user
+     - `GET /users/myAccount` : check my data
+     - `PATCH /users/myAccount` : update my data
+     - `GET /users` : get all users ( admin only )
+     - `GET /users/:id` : get user by id ( admin only )
+     - `PATCH /users/:id` : update user by id ( admin only )
+     - `DELETE /users/:id` : delete user by id ( admin only )
+   - courses
+     - `GET /courses` : check all courses
+     - `GET /courses/:id` check course by id
+     - `GET /courses/myCourse` : check my course
+     - `POST /courses/create` : create new course ( teacher only )
+     - `PATCH /courses/:id` : update course ( teacher ( course advisor ) and admin only )
+     - `DELETE /courses/:id` : delete course ( teacher ( course advisor ) and admin only )
+   - enrollments
+     - `POST /enrollments` : create new enrollment ( student only )
+     - `DELETE /enrollments/:id` : delete enrollment ( student ( enroll owner ), teacher ( course advisor ) and admin only )
+     - `GET /enrollments/myEnrollment`: get my enrollment
+7. Authentication
+   - use JWT send access token to Header `Authorization: Bearer <accessToken>`
+   - keep refresh token in cookie HttpOnly
+8. Role-Based Access Control
+   - use authorize role ( 'admin', 'instructor', 'student' ) to access API Endpoints
+## 🧑‍💻 Author
+  Nuntawat Jongtaweesuksan
+   
