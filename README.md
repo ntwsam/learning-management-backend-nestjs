@@ -22,7 +22,7 @@ This project aims to provide a scalable API for LMS. Key features include:
 - Docker
 - Node.js ( version 18 up )
 
-## How to install
+## 🛠️ How to install
 1. Clone repository
    ```bash
    git clone https://github.com/ntwsam/learning-management-backend-nestjs.git
