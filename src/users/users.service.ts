@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update_user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import * as bcrypt from 'bcrypt'
+import * as bcrypt from 'bcryptjs'
 import { Role } from '@prisma/client';
 
 @Injectable()
