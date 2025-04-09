@@ -17,8 +17,13 @@ export class AuthService {
     ) { }
 
     async generateUserTokens(userId: number) {
-        const accessToken = this.jwtService.sign({ userId }, { expiresIn: '15m' })
-        const refreshToken = this.jwtService.sign({ userId }, {
+        const user = await this.prisma.users.findUnique({where:{id:userId}})
+        if (!user){
+            throw new UnauthorizedException('User not found')
+        }
+        const payload = { userId: user.id, role: user.role}
+        const accessToken = this.jwtService.sign(payload, { expiresIn: '15m' })
+        const refreshToken = this.jwtService.sign(payload, {
             expiresIn: '7d',
             secret: process.env.JWT_REFRESH_SECRET
         })
@@ -104,6 +109,9 @@ export class AuthService {
 
         if (ttl > 0) {
             await this.redisService.set(`bl_token:${accessToken}`, 'revoked', ttl)
+        }
+        return {
+            message: 'Logged out successfully'
         }
     }
 

@@ -1,3 +1,4 @@
+import { Expose } from "class-transformer"
 import { IsEmail, IsEnum, IsNotEmpty, IsString, Matches, MinLength } from "class-validator"
 
 export enum Role {
@@ -6,18 +7,22 @@ export enum Role {
 }
 
 export class RegisterDto {
+    @Expose()
     @IsNotEmpty()
     @IsString()
     readonly firstname: string
 
+    @Expose()
     @IsNotEmpty()
     @IsString()
     readonly lastname: string
 
+    @Expose()
     @IsNotEmpty()
     @IsEmail()
     readonly email: string
 
+    @Expose()
     @IsNotEmpty()
     @MinLength(6)
     @Matches(
@@ -28,6 +33,7 @@ export class RegisterDto {
     )
     readonly password: string
 
+    @Expose()
     @IsNotEmpty()
     @IsEnum(Role)
     readonly role: Role

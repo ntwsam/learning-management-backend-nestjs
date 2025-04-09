@@ -1,11 +1,12 @@
-import { Controller, Post, Body, HttpStatus, HttpCode, Res, Req, UnauthorizedException } from '@nestjs/common';
+import { Controller, Post, Body, HttpStatus, HttpCode, Res, Req, UnauthorizedException, Get, BadRequestException } from '@nestjs/common';
 import { RegisterDto } from './dto/register_user.dto';
 import { AdminRegisterDto } from './dto/register_admin.dto'
 import { AuthService } from './auth.service';
-import { Users } from '@prisma/client';
+import { Role, Users } from '@prisma/client';
 import { Public } from './public.decorator';
 import { LoginDto } from './dto/login.dot';
 import { Request, Response } from 'express';
+import { Roles } from 'src/role/roles.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -14,14 +15,26 @@ export class AuthController {
     @Public()
     @HttpCode(HttpStatus.CREATED)
     @Post('signup')
-    async register(@Body() registerDto: RegisterDto): Promise<Users> {
+    async register(@Body() registerDto: RegisterDto){
+        const allowedKeys = Object.getOwnPropertyNames(new RegisterDto())
+        const receivedKeys = Object.keys(registerDto)
+        const invalidKeys = receivedKeys.filter((key)=>!allowedKeys.includes(key))
+        if (invalidKeys.length>0){
+            throw new BadRequestException(`Unexpected fields in request: ${invalidKeys}`)
+        }
         return this.authService.createUser(registerDto)
     }
 
     @Public()
     @HttpCode(HttpStatus.CREATED)
     @Post('admin/signup')
-    async adminRegister(@Body() adminRegisterDto: AdminRegisterDto): Promise<Users> {
+    async adminRegister(@Body() adminRegisterDto: AdminRegisterDto){
+        const allowedKeys = Object.getOwnPropertyNames(new AdminRegisterDto())
+        const receivedKeys = Object.keys(adminRegisterDto)
+        const invalidKeys = receivedKeys.filter((key)=>!allowedKeys.includes(key))
+        if (invalidKeys.length>0){
+            throw new BadRequestException(`Unexpected fields in request: ${invalidKeys}`)
+        }
         return this.authService.createAdmin(adminRegisterDto)
     }
 
@@ -46,9 +59,8 @@ export class AuthController {
         if (!token) {
             throw new UnauthorizedException('Access token not provided')
         }
-        await this.authService.logout(token)
         res.clearCookie('refresh_token')
-        return { message: 'Logged out succesfully' }
+        return this.authService.logout(token)
     }
 
     @Public()
@@ -73,9 +85,9 @@ export class AuthController {
         return message
     }
 
-    // @Roles(Role.admin)
-    // @Get('admin')
-    // async admin(){}
-
-    // @Get('protect')
+    @Roles(Role.admin)
+    @Get('admin')
+    async admin(){
+        return 'admin dashboard'
+    }
 }

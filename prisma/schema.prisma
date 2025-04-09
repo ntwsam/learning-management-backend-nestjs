@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -28,8 +22,8 @@ model Users {
   role       Role
   course     Courses[]     @relation("create")
   enrollment Enrollments[] @relation("register")
-  createdAt DateTime  @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
 }
 
 model Courses {
@@ -39,18 +33,18 @@ model Courses {
   advisorId   Int
   advisor     Users         @relation("create", fields: [advisorId], references: [id])
   enrollment  Enrollments[] @relation("object")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 }
 
 model Enrollments {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   courseId  Int
   studentId Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  course    Courses @relation("object", fields: [courseId], references: [id])
-  student   Users   @relation("register", fields: [studentId], references: [id])
+  course    Courses  @relation("object", fields: [courseId], references: [id])
+  student   Users    @relation("register", fields: [studentId], references: [id])
 
   @@unique([courseId, studentId])
 }
