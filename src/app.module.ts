@@ -10,9 +10,12 @@ import { RedisModule } from './redis/redis.module';
 import { UsersModule } from './users/users.module';
 import { CoursesModule } from './courses/courses.module';
 import { EnrollmentsModule } from './enrollments/enrollments.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [AuthModule, PrismaModule, RedisModule, UsersModule, CoursesModule, EnrollmentsModule],
+  imports: [AuthModule, PrismaModule, RedisModule, UsersModule, CoursesModule, EnrollmentsModule,
+    ConfigModule.forRoot({isGlobal: true})
+  ],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_GUARD,
